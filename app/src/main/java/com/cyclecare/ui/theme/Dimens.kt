@@ -19,6 +19,11 @@ object Radius {
     val large = 16.dp
     val extraLarge = 24.dp
     val full = 999.dp     // Pills & chips
+
+    // Short-name aliases used throughout the UI layer
+    val sm = small
+    val md = medium
+    val lg = large
 }
 
 object IconSize {
