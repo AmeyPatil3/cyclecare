@@ -61,7 +61,7 @@ class OnboardingViewModel @Inject constructor(
             cycleRepository.insertPeriod(
                 PeriodEntry(
                     startDate = startDate,
-                    flowIntensity = FlowIntensity.MEDIUM
+                    flow = FlowIntensity.MEDIUM
                 )
             )
             onComplete()

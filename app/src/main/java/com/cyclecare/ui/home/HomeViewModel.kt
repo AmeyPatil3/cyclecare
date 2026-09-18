@@ -99,7 +99,7 @@ class HomeViewModel @Inject constructor(
             cycleRepository.insertPeriod(
                 PeriodEntry(
                     startDate = today,
-                    flowIntensity = FlowIntensity.MEDIUM
+                    flow = FlowIntensity.MEDIUM
                 )
             )
         }

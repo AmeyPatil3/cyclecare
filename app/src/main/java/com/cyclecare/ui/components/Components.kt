@@ -31,6 +31,24 @@ data class QuickActionConfig(
     val iconTint: Color
 )
 
+/** Convenience overload — accepts params directly without constructing QuickActionConfig. */
+@Composable
+fun QuickActionButton(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    label: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    badge: String? = null,
+    iconBg: Color = PrimaryFixed,
+    iconTint: Color = Primary
+) {
+    QuickActionButton(
+        config = QuickActionConfig(label = label, icon = icon, iconBg = iconBg, iconTint = iconTint),
+        onClick = onClick,
+        modifier = modifier
+    )
+}
+
 @Composable
 fun QuickActionButton(
     config: QuickActionConfig,
@@ -79,7 +97,8 @@ fun PrimaryButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    icon: androidx.compose.ui.graphics.vector.ImageVector? = null
 ) {
     Button(
         onClick = onClick,
@@ -127,6 +146,29 @@ fun SecondaryButton(
 // ─────────────────────────────────────────────────────────────────────────────
 //  Check-in Metric Card cell (2×2 grid on Home Dashboard)
 // ─────────────────────────────────────────────────────────────────────────────
+
+/** Overload used by HomeScreen — maps title/subtitle/accentColor/onClick to the base composable. */
+@Composable
+fun CheckInMetricCard(
+    title: String,
+    value: String,
+    subtitle: String? = null,
+    icon: androidx.compose.ui.graphics.vector.ImageVector? = null,
+    accentColor: Color = Secondary,
+    onClick: (() -> Unit)? = null,
+    modifier: Modifier = Modifier
+) {
+    CheckInMetricCard(
+        label = title,
+        value = value,
+        badge = subtitle,
+        badgeBg = accentColor.copy(alpha = 0.15f),
+        badgeTextColor = accentColor,
+        icon = icon,
+        iconTint = accentColor,
+        modifier = modifier
+    )
+}
 
 @Composable
 fun CheckInMetricCard(
@@ -331,6 +373,51 @@ fun PhaseLegendRow(modifier: Modifier = Modifier) {
                     fontWeight = if (label == "Ovulatory") FontWeight.Bold else FontWeight.Normal
                 )
             }
+        }
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Log Section wrapper (used by QuickLogScreen / SymptomsScreen)
+// ─────────────────────────────────────────────────────────────────────────────
+
+@Composable
+fun LogSection(
+    title: String,
+    icon: ImageVector? = null,
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    Surface(
+        shape = RoundedCornerShape(Radius.lg),
+        color = MaterialTheme.colorScheme.surfaceContainerLowest,
+        shadowElevation = 1.dp,
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(Spacing.md),
+            verticalArrangement = Arrangement.spacedBy(Spacing.sm)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(Spacing.xs)
+            ) {
+                icon?.let {
+                    Icon(
+                        imageVector = it,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+            content()
         }
     }
 }

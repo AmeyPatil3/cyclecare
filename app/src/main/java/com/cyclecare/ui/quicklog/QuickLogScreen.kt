@@ -124,7 +124,7 @@ fun QuickLogScreen(
                     icon = Icons.Outlined.Medication
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
-                        SupplementType.values().chunked(2).forEach { rowSupplements ->
+                        SupplementType.values().toList().chunked(2).forEach { rowSupplements ->
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(Spacing.xs)
@@ -225,7 +225,7 @@ fun QuickLogScreen(
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        CervicalMucusType.values().chunked(2).forEach { rowMucus ->
+                        CervicalMucusType.values().toList().chunked(2).forEach { rowMucus ->
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(Spacing.xs)
