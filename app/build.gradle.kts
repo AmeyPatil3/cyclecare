@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.cyclecare"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.cyclecare.app"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
 
@@ -22,7 +22,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -75,8 +75,6 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
-    implementation(libs.hilt.work)
-    ksp(libs.hilt.work.compiler)
 
     // Room
     implementation(libs.room.runtime)
@@ -88,12 +86,6 @@ dependencies {
 
     // WorkManager
     implementation(libs.work.runtime.ktx)
-
-    // Vico Charts
-    implementation(libs.vico.compose.m3)
-
-    // Google Fonts
-    implementation(libs.androidx.ui.text.google.fonts)
 
     // Kotlinx
     implementation(libs.kotlinx.datetime)
