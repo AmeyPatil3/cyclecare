@@ -61,6 +61,32 @@ class Converters {
     fun toSymptom(value: String?): Symptom? =
         value?.let { enumValueOf<Symptom>(it) }
 
+    // List<Symptom> — used by SymptomEntry.symptoms
+    @TypeConverter
+    fun fromSymptomList(value: List<Symptom>?): String? =
+        value?.joinToString(",") { it.name }
+
+    @TypeConverter
+    fun toSymptomList(value: String?): List<Symptom> {
+        if (value.isNullOrBlank()) return emptyList()
+        return value.split(",").filter { it.isNotBlank() }.mapNotNull {
+            try { enumValueOf<Symptom>(it) } catch (e: Exception) { null }
+        }
+    }
+
+    // List<PainLocation> — used by PainEntry.locations
+    @TypeConverter
+    fun fromPainLocationList(value: List<PainLocation>?): String? =
+        value?.joinToString(",") { it.name }
+
+    @TypeConverter
+    fun toPainLocationList(value: String?): List<PainLocation> {
+        if (value.isNullOrBlank()) return emptyList()
+        return value.split(",").filter { it.isNotBlank() }.mapNotNull {
+            try { enumValueOf<PainLocation>(it) } catch (e: Exception) { null }
+        }
+    }
+
     @TypeConverter
     fun fromEmergencyEvent(value: EmergencyEvent?): String? = value?.name
 
