@@ -494,7 +494,7 @@ private fun getGuideForPhase(phase: CyclePhase): CycleSyncingGuide {
                 idealFocus = "Review monthly progress, establish boundary guidelines, and recharge without guilt.",
                 socialStamina = "Low • Introspective"
             )
-        ),
+        )
         CyclePhase.FOLLICULAR -> CycleSyncingGuide(
             phase = phase,
             movement = MovementGuide(
@@ -514,7 +514,7 @@ private fun getGuideForPhase(phase: CyclePhase): CycleSyncingGuide {
                 idealFocus = "Start ambitious new projects, learn complex skills, and architect plans for the upcoming month.",
                 socialStamina = "Rising • Collaborative"
             )
-        ),
+        )
         CyclePhase.OVULATORY -> CycleSyncingGuide(
             phase = phase,
             movement = MovementGuide(
@@ -534,7 +534,7 @@ private fun getGuideForPhase(phase: CyclePhase): CycleSyncingGuide {
                 idealFocus = "High-stakes meetings, public speaking, interviews, pitching, and rich social connection.",
                 socialStamina = "Peak • Outgoing"
             )
-        ),
+        )
         CyclePhase.LUTEAL -> CycleSyncingGuide(
             phase = phase,
             movement = MovementGuide(
