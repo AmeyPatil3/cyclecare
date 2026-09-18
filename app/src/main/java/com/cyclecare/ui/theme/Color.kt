@@ -111,3 +111,12 @@ val ArcMenstrual = Color(0xFFFFDAD6)
 val ArcBase = Color(0xFFEBEDFF)
 val ArcPinOuter = Color(0xFFFFFFFF)
 val ArcPinInner = Color(0xFF9C3D38)
+
+// ── Named semantic colours used in UI components ──────────────────────────────
+val SageFollicular = Color(0xFF436352)   // Sage green — follicular "Web Connected" indicator
+val AmberEnergy = Color(0xFFE08C2E)      // Warm amber — cortisol / energy warning banners
+
+// ── Phase theme colours ───────────────────────────────────────────────────────
+val RoseMenstrual = Color(0xFFFFDAD6)
+val CoralPink = Color(0xFFBC544F)
+val LavenderLuteal = Color(0xFFCFBFED)
