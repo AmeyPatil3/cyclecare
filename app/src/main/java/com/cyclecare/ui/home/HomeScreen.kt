@@ -342,14 +342,14 @@ fun HomeScreen(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(Spacing.xs)
                     ) {
-                        state.recentSymptoms.forEach { symptom ->
+                        state.recentSymptoms.flatMap { it.symptoms }.forEach { symptom ->
                             Surface(
                                 shape = RoundedCornerShape(Radius.full),
                                 color = MaterialTheme.colorScheme.primaryContainer,
                                 modifier = Modifier.padding(vertical = 2.dp)
                             ) {
                                 Text(
-                                    text = symptom.symptom.displayName,
+                                    text = symptom.displayName,
                                     style = MaterialTheme.typography.labelMedium,
                                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)

@@ -123,7 +123,7 @@ fun CalendarScreen(
                     date = state.selectedDate,
                     phase = state.selectedPhase,
                     log = state.selectedLog,
-                    symptoms = state.selectedSymptoms.map { it.symptom.displayName },
+                    symptoms = state.selectedSymptoms.flatMap { it.symptoms }.map { it.displayName },
                     onLogClick = onNavigateToQuickLog
                 )
             }

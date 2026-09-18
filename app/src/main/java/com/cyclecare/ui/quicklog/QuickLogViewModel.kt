@@ -159,29 +159,27 @@ class QuickLogViewModel @Inject constructor(
             )
             logRepository.saveLog(log)
 
-            // Save symptoms
-            for (s in state.selectedSymptoms) {
+            // Save all selected symptoms as one entry per day
+            if (state.selectedSymptoms.isNotEmpty()) {
                 symptomRepository.insertSymptom(
                     SymptomEntry(
                         date = state.date,
-                        symptom = s,
-                        severity = 2
+                        symptoms = state.selectedSymptoms.toList()
                     )
                 )
             }
 
-            // Save pain entries
-            for (p in state.selectedPainLocations) {
-                if (p != PainLocation.NONE) {
-                    symptomRepository.insertPain(
-                        PainEntry(
-                            date = state.date,
-                            location = p,
-                            intensity = if (state.painIntensity > 0) state.painIntensity else 3,
-                            duration = PainDuration.INTERMITTENT
-                        )
+            // Save all pain locations as one pain entry per day
+            val painLocations = state.selectedPainLocations.filter { it != PainLocation.NONE }
+            if (painLocations.isNotEmpty()) {
+                symptomRepository.insertPain(
+                    PainEntry(
+                        date = state.date,
+                        severity = if (state.painIntensity > 0) state.painIntensity else 3,
+                        locations = painLocations,
+                        duration = PainDuration.INTERMITTENT
                     )
-                }
+                )
             }
 
             _uiState.value = _uiState.value.copy(isSaving = false, isSaved = true)

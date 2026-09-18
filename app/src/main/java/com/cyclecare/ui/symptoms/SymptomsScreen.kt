@@ -56,8 +56,9 @@ class SymptomsViewModel @Inject constructor(
 
     private fun loadSymptoms() {
         viewModelScope.launch {
-            val symptoms = symptomRepository.getSymptomsForDate(today)
-            val map = symptoms.associate { it.symptom to it.severity }
+            val entries = symptomRepository.getSymptomsForDate(today)
+            // Flatten all symptom lists into a map with default severity 1
+            val map = entries.flatMap { it.symptoms }.associateWith { 1 }
             _uiState.value = _uiState.value.copy(selectedSymptoms = map)
         }
     }
@@ -81,12 +82,12 @@ class SymptomsViewModel @Inject constructor(
     fun saveSymptoms(onSuccess: () -> Unit) {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isSaving = true)
-            for ((symptom, severity) in _uiState.value.selectedSymptoms) {
+            val selectedList = _uiState.value.selectedSymptoms.keys.toList()
+            if (selectedList.isNotEmpty()) {
                 symptomRepository.insertSymptom(
                     SymptomEntry(
                         date = today,
-                        symptom = symptom,
-                        severity = severity
+                        symptoms = selectedList
                     )
                 )
             }
